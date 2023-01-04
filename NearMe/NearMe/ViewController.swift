@@ -10,6 +10,8 @@ import MapKit
 
 class ViewController: UIViewController {
     
+    var locationManager : CLLocationManager?
+    
     lazy var mapView : MKMapView = {
         let map = MKMapView()
         map.showsUserLocation = true
@@ -33,6 +35,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        view.backgroundColor = .systemPink
+        
+        // init location manager. Don't forget to add Location -when in usage in info.plist
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.requestWhenInUseAuthorization() // there is several options, and require different privacy warning in .plist
+        locationManager?.requestLocation()
         setupUI()
 
     }
@@ -54,8 +62,44 @@ class ViewController: UIViewController {
         mapView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         mapView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
+    }
+    
+    private func checkLocationAuth(){
+        guard let locationManager = locationManager, let location = locationManager.location else{ return }
         
+        switch locationManager.authorizationStatus{
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("Good to go")
+            // focus on user's location
+            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+            mapView.setRegion(region, animated: true)
+        case .denied:
+            print("User denied access")
+        case .notDetermined, .restricted:
+            print("Unavailable")
+        default:
+            print("Something went terribly wrong")
+        }
+    }
+    
+    
+}
+
+extension ViewController : CLLocationManagerDelegate{
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
     }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkLocationAuth()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+    }
+    
+    
+    
 }
 

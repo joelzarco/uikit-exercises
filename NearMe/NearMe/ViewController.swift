@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         // to add padding to the left inside the textField
         searchTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        searchTextField.delegate = self
         return searchTextField
     }()
 
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
         searchTextField.widthAnchor.constraint(equalToConstant: view.bounds.size.width / 1.2).isActive = true
         searchTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
         searchTextField.returnKeyType = .go
+        
         // mapView
         mapView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         mapView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
@@ -82,7 +84,39 @@ class ViewController: UIViewController {
         }
     }
     
+    private func findNearbyPlaces(by query : String){
+        mapView.removeAnnotations(mapView.annotations)
+        
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = query
+        request.region = mapView.region
+        
+        let search = MKLocalSearch(request: request)
+        search.start { [weak self] response, error in
+            guard let response = response, error == nil else { return }
+            print(response.mapItems)
+            // create a map annotation from every member in the mapItemsArray
+            let places = response.mapItems.map(PlaceAnnotation.init)
+            // now add them to the view
+            places.forEach { place in
+                self?.mapView.addAnnotation(place)
+            }
+        }
+    }
     
+    
+}
+
+extension ViewController : UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let text = textField.text ?? ""
+        if !text.isEmpty{
+            textField.resignFirstResponder()
+            // look for nearby places
+            findNearbyPlaces(by: text)
+        }
+        return true
+    }
 }
 
 extension ViewController : CLLocationManagerDelegate{
@@ -98,8 +132,5 @@ extension ViewController : CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
     }
-    
-    
-    
 }
 

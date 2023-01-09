@@ -26,7 +26,7 @@ class PlacesTableViewController : UITableViewController{
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.count
     }
     
@@ -36,6 +36,7 @@ class PlacesTableViewController : UITableViewController{
         // cell config
         var content = cell.defaultContentConfiguration()
         content.text = place.name
+        content.textProperties.color = .systemGray
         content.secondaryText = "secondary text"
         cell.contentConfiguration = content
         

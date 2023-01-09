@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         searchTextField.widthAnchor.constraint(equalToConstant: view.bounds.size.width / 1.2).isActive = true
         searchTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
         searchTextField.returnKeyType = .go
-        
+        searchTextField.textColor = .black
         // mapView
         mapView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         mapView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
         if let sheet = placesTVC.sheetPresentationController{
             sheet.prefersGrabberVisible = true
             sheet.detents = [.medium(), .large()]
-            present(placesTVC, animated: true)
+            self.present(placesTVC, animated: true)
         }
     }
     
@@ -108,7 +108,7 @@ class ViewController: UIViewController {
         let search = MKLocalSearch(request: request)
         search.start { [weak self] response, error in
             guard let response = response, error == nil else { return }
-            print(response.mapItems)
+            
             // create a map annotation from every member in the mapItemsArray
             let places = response.mapItems.map(PlaceAnnotation.init)
             // now add them to the view
@@ -116,11 +116,10 @@ class ViewController: UIViewController {
                 self?.mapView.addAnnotation(place)
             }
             // call presentPlaces
+            print(response.mapItems)
             self?.presentPlacesSheet(places: places)
         }
     }
-    
-    
 }
 
 extension ViewController : UITextFieldDelegate{
@@ -146,7 +145,7 @@ extension ViewController : CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
+        print(error.localizedDescription)
     }
 }
 

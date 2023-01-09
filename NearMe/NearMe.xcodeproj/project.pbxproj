@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		965D05D2296C5D40000E54F5 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D05D1296C5D40000E54F5 /* PlacesTableViewController.swift */; };
 		96D0D564296502E0004DC59B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D0D563296502E0004DC59B /* AppDelegate.swift */; };
 		96D0D566296502E0004DC59B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D0D565296502E0004DC59B /* SceneDelegate.swift */; };
 		96D0D568296502E0004DC59B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D0D567296502E0004DC59B /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		965D05D1296C5D40000E54F5 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		96D0D560296502E0004DC59B /* NearMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D0D563296502E0004DC59B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96D0D565296502E0004DC59B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		965D05D0296C5D1C000E54F5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				965D05D1296C5D40000E54F5 /* PlacesTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		96D0D557296502E0004DC59B = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +68,7 @@
 		96D0D562296502E0004DC59B /* NearMe */ = {
 			isa = PBXGroup;
 			children = (
+				965D05D0296C5D1C000E54F5 /* Controllers */,
 				96D290052967199200546C3C /* Extension */,
 				96D0D563296502E0004DC59B /* AppDelegate.swift */,
 				96D0D565296502E0004DC59B /* SceneDelegate.swift */,
@@ -153,6 +164,7 @@
 				96D0D568296502E0004DC59B /* ViewController.swift in Sources */,
 				96D0D564296502E0004DC59B /* AppDelegate.swift in Sources */,
 				96D0D566296502E0004DC59B /* SceneDelegate.swift in Sources */,
+				965D05D2296C5D40000E54F5 /* PlacesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

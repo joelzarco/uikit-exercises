@@ -23,18 +23,21 @@ class ViewController: UIViewController {
         let searchTextField = UITextField()
         searchTextField.layer.cornerRadius = 10
         searchTextField.clipsToBounds = true
-        searchTextField.backgroundColor = UIColor.white
+        searchTextField.backgroundColor = .systemBackground
         searchTextField.placeholder = "Search"
         searchTextField.leftViewMode = .always
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         // to add padding to the left inside the textField
         searchTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         searchTextField.delegate = self
+        searchTextField.textColor = .lightText
+        
         return searchTextField
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        overrideUserInterfaceStyle = .dark
 //        view.backgroundColor = .systemPink
         
         // init location manager. Don't forget to add Location -when in usage in info.plist
@@ -57,7 +60,7 @@ class ViewController: UIViewController {
         searchTextField.widthAnchor.constraint(equalToConstant: view.bounds.size.width / 1.2).isActive = true
         searchTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
         searchTextField.returnKeyType = .go
-        searchTextField.textColor = .black
+        
         // mapView
         mapView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         mapView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
@@ -90,6 +93,7 @@ class ViewController: UIViewController {
         
         let placesTVC = PlacesTableViewController(userLocation: userLocation, places: places)
         placesTVC.modalPresentationStyle = .pageSheet
+        
         
         if let sheet = placesTVC.sheetPresentationController{
             sheet.prefersGrabberVisible = true

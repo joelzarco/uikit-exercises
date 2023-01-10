@@ -12,7 +12,7 @@ import MapKit
 class PlacesTableViewController : UITableViewController{
     
     var userLocation : CLLocation
-    let places : [PlaceAnnotation]
+    var places : [PlaceAnnotation]
     var distanceInMiles : Bool
     
     init(userLocation: CLLocation, places: [PlaceAnnotation]) {
@@ -22,8 +22,13 @@ class PlacesTableViewController : UITableViewController{
         super.init(nibName: nil, bundle: nil)
         // register cell
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PlaceCell")
+        // brng selected place to the top
+        self.places.swapAt(indexForSelectedRow ?? 0, 0)
     }
     
+    private var indexForSelectedRow : Int?{
+        return self.places.firstIndex(where: { $0.isSelected == true })
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -56,9 +61,11 @@ class PlacesTableViewController : UITableViewController{
         var content = cell.defaultContentConfiguration()
         content.text = place.name
         content.textProperties.color = .lightText
+        
         let dist : CLLocationDistance = calculateDistance(from: userLocation, to: place.location)
         content.secondaryText = formatDistance(distance: dist)
         cell.contentConfiguration = content
+        cell.backgroundColor = place.isSelected ? .secondarySystemBackground : .systemBackground
         
         return cell
     }

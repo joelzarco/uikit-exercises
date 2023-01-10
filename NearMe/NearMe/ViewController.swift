@@ -11,9 +11,11 @@ import MapKit
 class ViewController: UIViewController {
     
     var locationManager : CLLocationManager?
+    private var places : [PlaceAnnotation] = []
     
     lazy var mapView : MKMapView = {
         let map = MKMapView()
+        map.delegate = self
         map.showsUserLocation = true
         map.translatesAutoresizingMaskIntoConstraints = false
         return map
@@ -76,7 +78,7 @@ class ViewController: UIViewController {
         case .authorizedAlways, .authorizedWhenInUse:
             print("Good to go")
             // focus on user's location
-            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
             mapView.setRegion(region, animated: true)
         case .denied:
             print("User denied access")
@@ -114,15 +116,38 @@ class ViewController: UIViewController {
             guard let response = response, error == nil else { return }
             
             // create a map annotation from every member in the mapItemsArray
-            let places = response.mapItems.map(PlaceAnnotation.init)
+            self?.places = response.mapItems.map(PlaceAnnotation.init)
             // now add them to the view
-            places.forEach { place in
+            self?.places.forEach { place in
                 self?.mapView.addAnnotation(place)
             }
             // call presentPlaces
             print(response.mapItems)
-            self?.presentPlacesSheet(places: places)
+            // given that places was converted into a top level var
+            if let myPlaces = self?.places{
+                self?.presentPlacesSheet(places: myPlaces)
+            }
         }
+    }
+}
+
+extension ViewController : MKMapViewDelegate{
+    
+    // clear previous selections
+    private func clearAllSelections(){
+        self.places = self.places.map({ place in
+            place.isSelected = false
+            return place
+        })
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
+        clearAllSelections()
+        //method to present placesSheet when an annotation is selected in the map
+        guard let selectionAnnotation = annotation as? PlaceAnnotation else { return }
+        let placeAnnotation = self.places.first(where: { $0.id == selectionAnnotation.id })
+        placeAnnotation?.isSelected = true
+        presentPlacesSheet(places: self.places)
     }
 }
 

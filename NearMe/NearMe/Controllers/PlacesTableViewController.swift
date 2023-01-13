@@ -22,7 +22,7 @@ class PlacesTableViewController : UITableViewController{
         super.init(nibName: nil, bundle: nil)
         // register cell
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PlaceCell")
-        // brng selected place to the top
+        // bring selected place to the top of the tableView
         self.places.swapAt(indexForSelectedRow ?? 0, 0)
     }
     
@@ -52,6 +52,15 @@ class PlacesTableViewController : UITableViewController{
 //        }
         let kilom = Measurement(value: distance, unit: UnitLength.kilometers)
         return kilom.formatted()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let place = places[indexPath.row]
+        print("Selected row: \(place.name)")
+        let placeDetailVC = PlaceDetailViewController(place: place)
+        present(placeDetailVC, animated: true)
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

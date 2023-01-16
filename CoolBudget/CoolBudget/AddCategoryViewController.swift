@@ -69,9 +69,45 @@ class AddCategoryViewController : UIViewController{
         
         setUpUI()
     }
+    // Save to coreData
+    private func saveBudgetCategory(){
+        
+        guard let name = nameTextField.text, let amount = amountTextField.text else { return }
+        
+        do{
+            // BudgetCategory as defined in BudgetModel in coreData
+            let budgetCategory = BudgetCategory(context: persistentContainer.viewContext)
+            budgetCategory.name = name
+            budgetCategory.amount = Double(amount) ?? 0.0
+            try persistentContainer.viewContext.save() // needs to be done with a try
+            print("cool coreData ")
+            dismiss(animated: true)
+        }
+        catch{
+            errorMessageLabel.text = "Unable to save budget category"
+        }
+        
+    }
+    
+    private var isFormValid : Bool{
+        guard let name = nameTextField.text, let amount = amountTextField.text else{
+            return false
+        }
+        // check following conditions and implement neccessary methods
+        return !name.isEmpty && !amount.isEmpty && amount.isNumeric && amount.isGreaterThan(0)
+    }
     
     @objc func addButtonPressed(_ sender : UIButton){
         print("add button pressed")
+        // call validation
+        if( isFormValid){
+            // implement methods to save in coreData
+            print("Saving to core data")
+            saveBudgetCategory()
+        } else{
+            errorMessageLabel.text = "Unable to save budget."
+        }
+        
     }
     private func setUpUI(){
         let stackView = UIStackView()

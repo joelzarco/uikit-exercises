@@ -28,7 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
         window.overrideUserInterfaceStyle = .dark // to force dark mode
-        window.rootViewController = BudgetCategoriesViewController(persistentContainer: persistentContainer)
+        let navController = UINavigationController(rootViewController: BudgetCategoriesViewController(persistentContainer: persistentContainer))
+        window.rootViewController = navController
         self.window = window
     }
 

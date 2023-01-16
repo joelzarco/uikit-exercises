@@ -24,6 +24,21 @@ class BudgetCategoriesViewController : UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemBackground
+        setupUI()
+    }
+    
+    @objc func showAddBudgetCategory(_ sender : UIBarButtonItem){
+        print("bar button tapped")
+        let navController = UINavigationController(rootViewController: AddCategoryViewController(persistentContainer: persistentContainer))
+        present(navController, animated: true)
+    }
+    
+    private func setupUI(){
+        
+        let addBudgetCategoryButton = UIBarButtonItem(title: "Add category", style: .done, target: self, action: #selector(showAddBudgetCategory))
+        self.navigationItem.rightBarButtonItem = addBudgetCategoryButton
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "My Budget"
     }
 }

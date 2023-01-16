@@ -14,6 +14,7 @@
 		9634B56529721FDB006939AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9634B56329721FDB006939AC /* LaunchScreen.storyboard */; };
 		9634B56E29722211006939AC /* BudgetModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9634B56C29722211006939AC /* BudgetModel.xcdatamodeld */; };
 		9634B570297223E8006939AC /* BudgetCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9634B56F297223E8006939AC /* BudgetCategoriesTableViewController.swift */; };
+		9634B57229722EB6006939AC /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9634B57129722EB6006939AC /* AddCategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		9634B56629721FDB006939AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9634B56D29722211006939AC /* BudgetModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BudgetModel.xcdatamodel; sourceTree = "<group>"; };
 		9634B56F297223E8006939AC /* BudgetCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCategoriesTableViewController.swift; sourceTree = "<group>"; };
+		9634B57129722EB6006939AC /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				9634B55A29721FD9006939AC /* SceneDelegate.swift */,
 				9634B55C29721FD9006939AC /* ViewController.swift */,
 				9634B56F297223E8006939AC /* BudgetCategoriesTableViewController.swift */,
+				9634B57129722EB6006939AC /* AddCategoryViewController.swift */,
 				9634B56129721FDB006939AC /* Assets.xcassets */,
 				9634B56329721FDB006939AC /* LaunchScreen.storyboard */,
 				9634B56629721FDB006939AC /* Info.plist */,
@@ -142,6 +145,7 @@
 			files = (
 				9634B56E29722211006939AC /* BudgetModel.xcdatamodeld in Sources */,
 				9634B55D29721FD9006939AC /* ViewController.swift in Sources */,
+				9634B57229722EB6006939AC /* AddCategoryViewController.swift in Sources */,
 				9634B570297223E8006939AC /* BudgetCategoriesTableViewController.swift in Sources */,
 				9634B55929721FD9006939AC /* AppDelegate.swift in Sources */,
 				9634B55B29721FD9006939AC /* SceneDelegate.swift in Sources */,
